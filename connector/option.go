@@ -7,12 +7,14 @@ import (
 
 	"github.com/go-gost/core/common/net/dialer"
 	"github.com/go-gost/core/logger"
+	"github.com/xtls/reality"
 )
 
 type Options struct {
-	Auth      *url.Userinfo
-	TLSConfig *tls.Config
-	Logger    logger.Logger
+	Auth          *url.Userinfo
+	TLSConfig     *tls.Config
+	REALITYConfig *reality.Config
+	Logger        logger.Logger
 }
 
 type Option func(opts *Options)
@@ -26,6 +28,12 @@ func AuthOption(auth *url.Userinfo) Option {
 func TLSConfigOption(tlsConfig *tls.Config) Option {
 	return func(opts *Options) {
 		opts.TLSConfig = tlsConfig
+	}
+}
+
+func REALITYConfigOption(config *reality.Config) Option {
+	return func(opts *Options) {
+		opts.REALITYConfig = config
 	}
 }
 

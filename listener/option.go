@@ -11,6 +11,7 @@ import (
 	"github.com/go-gost/core/limiter/traffic"
 	"github.com/go-gost/core/logger"
 	"github.com/go-gost/x/stats"
+	"github.com/xtls/reality"
 )
 
 type Options struct {
@@ -18,6 +19,7 @@ type Options struct {
 	Auther         auth.Authenticator
 	Auth           *url.Userinfo
 	TLSConfig      *tls.Config
+	REALITYConfig  *reality.Config
 	Admission      admission.Admission
 	TrafficLimiter traffic.TrafficLimiter
 	ConnLimiter    conn.ConnLimiter
@@ -51,6 +53,12 @@ func AuthOption(auth *url.Userinfo) Option {
 func TLSConfigOption(tlsConfig *tls.Config) Option {
 	return func(opts *Options) {
 		opts.TLSConfig = tlsConfig
+	}
+}
+
+func REALITYConfigOption(config *reality.Config) Option {
+	return func(opts *Options) {
+		opts.REALITYConfig = config
 	}
 }
 

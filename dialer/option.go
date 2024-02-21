@@ -6,13 +6,24 @@ import (
 
 	"github.com/go-gost/core/common/net/dialer"
 	"github.com/go-gost/core/logger"
+	"github.com/xtls/reality"
 )
 
 type Options struct {
-	Auth          *url.Userinfo
-	TLSConfig     *tls.Config
-	Logger        logger.Logger
-	ProxyProtocol int
+	Auth                *url.Userinfo
+	TLSConfig           *tls.Config
+	REALITYClientConfig *RealityClientConfig
+	Logger              logger.Logger
+	ProxyProtocol       int
+}
+
+type RealityClientConfig struct {
+	*reality.Config
+	//TODO: Fingerprint string
+	Show       bool
+	ServerName string
+	PublicKey  []byte
+	ShortId    []byte
 }
 
 type Option func(opts *Options)
@@ -26,6 +37,12 @@ func AuthOption(auth *url.Userinfo) Option {
 func TLSConfigOption(tlsConfig *tls.Config) Option {
 	return func(opts *Options) {
 		opts.TLSConfig = tlsConfig
+	}
+}
+
+func REALITYClientConfigOption(config *RealityClientConfig) Option {
+	return func(opts *Options) {
+		opts.REALITYClientConfig = config
 	}
 }
 

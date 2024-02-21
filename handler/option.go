@@ -12,19 +12,21 @@ import (
 	"github.com/go-gost/core/logger"
 	"github.com/go-gost/core/metadata"
 	"github.com/go-gost/core/observer"
+	"github.com/xtls/reality"
 )
 
 type Options struct {
-	Bypass      bypass.Bypass
-	Router      *chain.Router
-	Auth        *url.Userinfo
-	Auther      auth.Authenticator
-	RateLimiter rate.RateLimiter
-	Limiter     traffic.TrafficLimiter
-	TLSConfig   *tls.Config
-	Logger      logger.Logger
-	Observer observer.Observer
-	Service     string
+	Bypass        bypass.Bypass
+	Router        *chain.Router
+	Auth          *url.Userinfo
+	Auther        auth.Authenticator
+	RateLimiter   rate.RateLimiter
+	Limiter       traffic.TrafficLimiter
+	TLSConfig     *tls.Config
+	REALITYConfig *reality.Config
+	Logger        logger.Logger
+	Observer      observer.Observer
+	Service       string
 }
 
 type Option func(opts *Options)
@@ -68,6 +70,12 @@ func TrafficLimiterOption(limiter traffic.TrafficLimiter) Option {
 func TLSConfigOption(tlsConfig *tls.Config) Option {
 	return func(opts *Options) {
 		opts.TLSConfig = tlsConfig
+	}
+}
+
+func REALITYConfigOption(config *reality.Config) Option {
+	return func(opts *Options) {
+		opts.REALITYConfig = config
 	}
 }
 
