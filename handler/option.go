@@ -27,6 +27,7 @@ type Options struct {
 	Logger        logger.Logger
 	Observer      observer.Observer
 	Service       string
+	SendProxy     int
 }
 
 type Option func(opts *Options)
@@ -106,5 +107,11 @@ type HandleOption func(opts *HandleOptions)
 func MetadataHandleOption(md metadata.Metadata) HandleOption {
 	return func(opts *HandleOptions) {
 		opts.Metadata = md
+	}
+}
+
+func SendProxyOption(sppv int) Option {
+	return func(opts *Options) {
+		opts.SendProxy = sppv
 	}
 }
