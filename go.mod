@@ -4,8 +4,6 @@ go 1.21
 
 toolchain go1.22.0
 
-replace github.com/go-gost/x => ../x
-
 require (
 	github.com/go-gost/x v0.0.0-20240131151842-25dcf536c6f5
 	github.com/xtls/reality v0.0.0-20231112171332-de1173cf2b19
